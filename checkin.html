@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monday Form Submit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #preview {
+      display: none;
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Submit the Form Below</h2>
+
+  <iframe 
+    id="formFrame"
+    src="https://forms.monday.com/forms/cb6042e394c416cff753f0444dac09d7?r=use1"
+    allowfullscreen>
+  </iframe>
+
+  <div id="preview">Form submitted! Refreshing in 3 seconds...</div>
+
+  <script>
+    // Watch the iframe for a postMessage from the Monday.com form
+    window.addEventListener("message", function(event) {
+      if (event.origin.includes("monday.com") && event.data === "form-submitted") {
+        document.getElementById("preview").style.display = "block";
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      }
+    }, false);
+  </script>
+
+</body>
+</html>
